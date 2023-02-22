@@ -1,0 +1,23 @@
+{
+  "name": "thesocialnetwork",
+  "version": "1.0.0",
+  "description": "social media back-end app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darthcurtiscass/TheSocialNetwork.git"
+  },
+  "author": "darthcurtiscass",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darthcurtiscass/TheSocialNetwork/issues"
+  },
+  "homepage": "https://github.com/darthcurtiscass/TheSocialNetwork#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.10.0"
+  }
+}
