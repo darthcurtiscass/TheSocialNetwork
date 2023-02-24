@@ -10,12 +10,12 @@ const reactionSchema = new Schema(
         },
         reactionBody: {
             type: String,
-            require: true,
+            required: true,
             length: [,280]
         },
         username: {
             type: String,
-            require: true
+            required: true
         },
         createdAt: {
             type: Date,
@@ -29,4 +29,4 @@ const reactionSchema = new Schema(
     }
 );
 
-reactionSchema
+module.exports = reactionSchema

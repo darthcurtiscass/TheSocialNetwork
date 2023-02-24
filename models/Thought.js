@@ -1,10 +1,11 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction')
 
 const thoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
-            require: true,
+            required: true,
             length: [1, 280],
         },
         createdAt: {
@@ -13,7 +14,7 @@ const thoughtSchema = new Schema(
         },
         username: {
             type: String,
-            require: true,
+            required: true,
         },
         reactions: [reactionSchema]
     },

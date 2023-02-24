@@ -1,5 +1,5 @@
+// const { ObjectId } = require('mongoose');
 const { User, Thought} = require('../models');
-const { ObjectId } = require('mongoose');
 
 // const userTotal = async () =>
 //     User.aggregate()
@@ -25,10 +25,10 @@ module.exports = {
                 ? res.status(404).json({message: "no user found by that id"})
                 : res.json(user)
         )
-        .catch(err) => {
+        .catch((err) => {
             console.log(err);
             return res.status(500).json(err);
-        };
+        });
     },
 
     createUser(req, res) {
@@ -60,6 +60,31 @@ module.exports = {
             .then(() => res.json({ message: 'user and thier thoughts erased'}))
     },
 
-    //add functions to add a new friend to a user's friend list & remove a friend from a user's friend list.
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            {$addToSet: {friends: req.body}},
+        )
+            .then((userFriend) => 
+                !userFriend
+                ? res.status(404).json({message: "no friend found"})
+                : res.status(200).json(userFriend)
+                )
+                .catch((err) => res.status(500).json(err));
+    },
+
+    removeFriend(req, res) {
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            {$pull: {friend: {friendId: req.params.friendId}}},
+            {runValidators: true, new: true}
+        )
+            .then((userFriend) => 
+                !userFriend
+                ? res.status(404).json({message: "no friend found"})
+                : res.status(200).json(userFriend)
+                )
+                .catch((err) => res.status(500).json(err));
+    }
 
 };
