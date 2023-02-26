@@ -28,20 +28,22 @@ module.exports = {
 
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => 
-                !thought
-                ? res.status(404).json({message: "thought creation failure"})
-                : User.findOneAndUpdate(
-                    {_id: {$in: thought._id}},
-                    {$addToSet: {thoughts: req.body}},
-                    {runValidators: true, new: true}
-            ))
+            .then((thought) => {
+                return User.findOneAndUpdate(
+                    { username: req.body.username },
+                    {$addToSet: {thoughts: thought._id}},
+                    {new: true}
+            )}
+            )
             .then((user) =>
                 !user
                     ? res.status(404).json({message: "Thought wasn't associated with a user. Try again"})
                     : res.status(200).json("Thought posted and tied to user.")
             )
-            .catch((err) => res.status(500).json(err))
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err)
+            })
     },
 
     updateThought(req, res) {
