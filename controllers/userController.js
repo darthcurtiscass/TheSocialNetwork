@@ -1,4 +1,3 @@
-// const { ObjectId } = require('mongoose');
 const { User, Thought } = require("../models");
 
 module.exports = {
@@ -72,7 +71,7 @@ module.exports = {
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friend: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((userFriend) =>

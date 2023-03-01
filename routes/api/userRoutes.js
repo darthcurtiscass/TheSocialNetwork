@@ -22,7 +22,7 @@ router
     .post(addFriend)
     .delete(removeFriend)
 
-// /api/courses/:userId
+// /api/users/:userId
 router
   .route('/:userId')
   .get(getOneUser)
